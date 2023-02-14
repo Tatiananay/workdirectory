@@ -1,35 +1,44 @@
 #include <iostream>
-#include<windows.h>
-#define color SetConsoleTextAttribute      
 using namespace std;
 
-int funcion(int valor){
-	valor= valor +10;
-	return valor;
-}
-
-int funcionpunteros(int* valor){  //const protege el procesod de escritura
-
-	*valor = *valor + 10;
-	return *valor;
-}
+struct Mascota
+{
+	string tipo;
+	string nombre;
+};
+struct Alumno
+{
+	int id;
+	int edad;
+	char nombre[20];
+	Mascota mascotita;
+};
 
 int main()
 {
-	int numero =10;
+	Alumno a0; // no debe dejar
+	Alumno a1 = {1,10,"pepe",{"perro","firulais"}};
+    Alumno a2 = {2,20,"luis"};
+    Alumno lst[]={a1,a2,3,100,"luisa",{"gato","firulais"} };
 
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);  //Función propia de la librería windows.h 
-    color(hConsole, 3);
-					                                   //Presenta color a la consola (Aguamarina)
-	cout << "Antes de la funcion:	"<<numero<<endl;
-	funcion(numero);
-	color(hConsole, 3);  
-	cout << "Despues de la funcion:	"<<numero<<endl<<endl;
+	a0.edad = 10;
+	a1.edad = 12;
+	a1.mascotita.nombre ="firulaiza";  //cambia el nombre.
 
+    cout<<endl<<"[+]"
+        <<endl<<" - "<<"id:"    <<a1.id
+        <<endl<<" - "<<"edad:"  <<a1.edad
+        <<endl<<" - "<<"nombre:"<<a1.nombre
+        <<endl<<" - "<<"Mascota.tipo:"<<a1.mascotita.tipo
+		<<endl<<" - "<<"Mascota.nombre: "<<a1.mascotita.nombre
+		<<endl; 
 
-	color(hConsole, 5);  
-	cout << "Antes de la funcionpuntero:	"<<numero<<endl;
-	color(hConsole, 5);  
-	funcionpunteros(&numero);
-	cout << "Despues de la funcionpuntero:	"<<numero<<endl;
+	for(auto &&a : lst)
+	cout<<endl<<"[+]"
+		<<endl<<" - "<<"id:"    <<a.id
+        <<endl<<" - "<<"edad:"  <<a.edad
+        <<endl<<" - "<<"nombre:"<<a.nombre
+		<<endl<<" - "<<"Mascota.tipo:"<<a.mascotita.tipo
+		<<endl<<" - "<<"Mascota.nombre: "<<a.mascotita.nombre
+		<<endl; 
 }
